@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
-#include <fstream> //ofstream y ifstrem. Acordarnos de cuando se manden datos al archivo usar ios::app o ios::binary para archivos binarios
+#include <fstream> 
 #include<time.h>
 #include<stdlib.h>
-#include<cstring> //para usar el toupper 
+#include<cstring> 
 
 using namespace std;
 
@@ -58,7 +58,6 @@ void gravedadarriba(char [][maxcol],int, int,int,int,int );
 void gravedadabajo(char [][maxcol],int, int,int,int,int );
 bool evaluartablero(char [][maxcol],int, int);
 void sobreescribirdatos(jugador [],int);
-//trabajo realizado por Juan Manuel Duran, Joan Rojas y Andres Centanaro.
 
 int main() {
 
@@ -136,10 +135,8 @@ int cantjuegosganados = 0;
 						cambio=true;
 					}
 				}
-          //aca en esta parte es que al darle jugar lo primero que se pregunte es el alias del jugador, de tal manera que si tiene un tablero en pausa no haya necesidad de que se configure el tablero antes de iniciar el juego (pues no tendria sentido que se le pusiera a configurar un tablero a alguien que tiene un juego en pausa por que se supone que ya configuro el tablero que deseaba)
   
           if(cambio==true){
-            //si se logra hacer la idea del comentario anterior, se eliminaria el preguntar el alias adentro de este if, solamente se entraria a este if cuando se verifique, o que configuro un tablero o que su alias tiene un juego en pausa
 						
 						ifstream archivoJugadoresLect;
 						archivoJugadoresLect.open("jugadores.dat", ios::binary);
@@ -326,7 +323,6 @@ int cantjuegosganados = 0;
 										}
 
 										if(pausa==-1){
-											//lA IDEA ACA SERIA NO DEJAR MAS DE UN TABLERO EN PAUSA POR JUGADOR, BUSCAR LA MANERA DE QUE PRIMERO SE BUSQUE UN ALIAS IGUAL EN EL ARCHIVO, Y SI LO ENCUENTRA SE REEEMPLAZE DIRECTAMENTE EN LOS DATOS GUARDADOS PARA ESE ALIAS, SI NO, PUES QUE LO ESCRIBA SIN MAS
 											
 											time(&fin);
                       segundos = difftime(fin, inicio)+segundospausa;
@@ -338,7 +334,6 @@ int cantjuegosganados = 0;
 											for(int i=0;i<filas;i++){
 												for(int j=0;j<columnas;j++){
 													tablerotemp[i][j] = tablero[i][j];
-                          //en teoria aca tenemos que mandar los puntos parciales al archivo de tablero.dat, para cuanod se gane o se finalice el juego, estos puntos parciales se sumen con los totales y se llegue al resultado
 												}
 											}
 
@@ -369,11 +364,8 @@ int cantjuegosganados = 0;
                       cout<<"➳  Andres Felipe Cenatanaro Tibaquira."<<endl;
                       cout<<"➳  Joan Sebastian Rojas Mejia."<<endl<<endl;
                       cout<<"©Javeriana - 2021";
-											//aca se me ocurre que los puntajes podriamos mandarselos al archivo de pausa tambien, cosa que si una partida se pone mas de una vez en pausa, los puntajes sigan sumandose y volviendose a guardar, trayendo el puntaje guardado en el archivo y sumandoselo al puntaje obtenido en la sesion de juego, exactamente la misma idea para el tiempo de sesion y tiempo total
 										}
 										else if(pausa==0 && haberganado==false){
-                      //pausa==0||haberganado==true era falso 
-											//aca arriba deberia de ir que no se guarde dentro del archivo de pausa
 											time(&fin);
 											segundos = difftime(fin, inicio)+segundospausa;
                       puntaje = puntaje + puntajepausa;
@@ -1067,17 +1059,10 @@ void statscorreo(){
 			jugadoresLect[i].correo[j] = tolower(jugadoresLect[i].correo[j]);
 		}
 	}
-	
-	//se hace correo[j]para recorrer el correo letra por letra y no hacer una comparacion de la palabra total, de esta manera, se convierten cada uno de los caracteres en minusculas
-
-	//touper son las mayusculas del codigo, se hace par evitar que las comparaciones se hagan teniendo en cuenta los valores cambiados al comparar valores de mayusculas y minusculas
 
 	for(int i=0; i<tam;i++){
 	  for(int j=i+1;j<tam;j++){
 	    if(strcmp(jugadoresLect[i].correo,jugadoresLect[j].correo) > 0){
-
-        //al comparar con un strcmp cuando es un valor positivo significa que la cadena tiene un valor mayor o va despues alfabeticamente con la cadena que se comparo ">" en orden alfabetico de a-z .
-        
 				jugador temp;
 				temp = cambiarJugadores(temp, jugadoresLect[i]);
 				jugadoresLect[i] = cambiarJugadores(jugadoresLect[i], jugadoresLect[j]);
@@ -1439,7 +1424,6 @@ jugador cambiarJugadores(jugador a, jugador b){
 	return a;
 }
 
-//la funcion de gravedad izquierda funciona ya el copiado de datos de filas de arriba pero no funciona el convertir los ultimas casillas en espacios en blanco
 
 //-------------------- Buscar palabras --------------------
 
@@ -1520,7 +1504,7 @@ void gravedadabajo(char tablero [][maxcol],int filas, int columnas,int movfila,i
   int contador=0;
   int j=movcolumna;
   
-	for(int i=movfila+iguales-1;i>=0;i--){ //usamos la misma formulacion dentro del if ya que inicializamos el i como si fuese la posicion inicial del gravedad arriba.
+	for(int i=movfila+iguales-1;i>=0;i--){ 
   
 		if(iguales>=2){
 			if(tablero[i][j]==' '){
